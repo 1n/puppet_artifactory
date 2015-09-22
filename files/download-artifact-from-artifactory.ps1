@@ -88,7 +88,7 @@ if ("${version}" -match "snapshot" -and ${timestamped_snapshot}) {
 }
 
 if ($username -and $password) {
-	# TODO: support for authentication
+	$creds = New-Object System.Management.Automation.PSCredential -ArgumentList $username, $password
     write-error "WARNING: Username and password was specified, but authenticated access is not yet supported in this script!"
 }
 
@@ -112,6 +112,9 @@ try {
 	[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
 
 	$wc = New-Object System.Net.WebClient
+    if $creds {
+        $wc.Credentials = new-object System.Net.NetworkCredential($username, $creds.GetNetworkCredential().Password)
+    }
 	$wc.DownloadFile("${request_url}", "$out")
 }
 catch {
