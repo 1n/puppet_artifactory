@@ -32,9 +32,10 @@
 
 param(
     [switch]$help,
-    [switch]$verbose,
     [switch]$timestamped_snapshot, 
     [string]$artifactGAV,
+    [AllowEmptyString()]
+    [AllowNull()]
     [string]$classifier,
     [string]$e_packaging='jar',
     [string]$output,
@@ -48,11 +49,6 @@ param(
 if ($help) {
 	get-help $MyInvocation.MyCommand.Definition
     exit 0
-}
-
-if ($verbose) {
-    $VerbosePreference = "Continue"
-    $curl_verbose='-v'
 }
 
 ($groupid, $artifactid, $version) = $artifactGAV.split(':')
