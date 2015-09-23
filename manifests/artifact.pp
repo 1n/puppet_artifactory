@@ -74,7 +74,7 @@ define artifactory::artifact(
     $timestampedRepo = "-t"
   }
 
-  $cmdpart = "${artifactory::installdir}/${artifactory::scriptname} -a ${gav} -e ${packaging} ${includeClass} -n ${artifactory::ARTIFACTORY_URL} ${includeRepo} ${timestampedRepo} -o ${output} ${args} -v"
+  $cmdpart = "${artifactory::installdir}/${artifactory::scriptname} -a ${gav} -e ${packaging} ${includeClass} -n ${artifactory::artifactory_url} ${includeRepo} ${timestampedRepo} -o ${output} ${args} -v"
 
   if $::operatingsystem == 'windows' {
     Exec { path => ['C:/Windows/System32', 'C:/Windows/System32/WindowsPowerShell/v1.0'], }

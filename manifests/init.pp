@@ -28,7 +28,7 @@ class artifactory(
   if $url == '' {
     fail('Cannot initialize the Artifactory class - the url parameter is mandatory')
   }
-  $ARTIFACTORY_URL = $url
+  $artifactory_url = $url
 
   if ($username != '') and ($password == '') {
     fail('Cannot initialize the Artifactory class - both username and password must be set')
@@ -56,7 +56,7 @@ class artifactory(
     ensure  => file,
     mode    => '0755',
     source  => "puppet:///modules/artifactory/${scriptname}",
-    require => File ["${installdir}"]
+    require => File["${installdir}"]
   }
 
 
